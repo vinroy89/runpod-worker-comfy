@@ -1,5 +1,5 @@
 # Use Nvidia CUDA base image
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 as base
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 AS base
 
 # Prevents prompts from packages asking for user input during installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -34,15 +34,15 @@ RUN wget -O models/checkpoints/RealVisXL_V4.0.safetensors https://huggingface.co
 RUN wget -O models/checkpoints/SUPIR-v0Q_fp16.safetensors https://huggingface.co/Kijai/SUPIR_pruned/resolve/main/SUPIR-v0Q_fp16.safetensors
 RUN wget -O models/checkpoints/SUPIR-v0F_fp16.safetensors https://huggingface.co/Kijai/SUPIR_pruned/resolve/main/SUPIR-v0F_fp16.safetensors
 
-RUN git clone https://github.com/kijai/ComfyUI-SUPIR.git custom_nodes/ComfyUI_SUPIR
-RUN git clone https://github.com/Gourieff/comfyui-reactor-node.git custom_nodes/ComfyUI_Reactor
-RUN git clone https://github.com/alt-key-project/comfyui-dream-project.git custom_nodes/ComfyUI_DreamProject
-RUN git clone https://github.com/kijai/ComfyUI-KJNodes.git custom_nodes/ComfyUI_KJNodes
-
 # Install ComfyUI dependencies
 RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 \
     && pip3 install --no-cache-dir xformers==0.0.21 \
     && pip3 install -r requirements.txt
+
+RUN git clone https://github.com/kijai/ComfyUI-SUPIR.git custom_nodes/ComfyUI_SUPIR
+RUN git clone https://github.com/Gourieff/comfyui-reactor-node.git custom_nodes/ComfyUI_Reactor
+RUN git clone https://github.com/alt-key-project/comfyui-dream-project.git custom_nodes/ComfyUI_DreamProject
+RUN git clone https://github.com/kijai/ComfyUI-KJNodes.git custom_nodes/ComfyUI_KJNodes
 
 # Install runpod
 RUN pip3 install runpod requests
