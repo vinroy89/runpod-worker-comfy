@@ -285,11 +285,11 @@ If you prefer to include your models directly in the Docker image, follow these 
 3. **Build Your Docker Image**:
    - Build the image locally:
      ```bash
-     docker build -t <your_dockerhub_username>/runpod-worker-comfy:dev --platform linux/amd64 .
+     docker build -t frenchyyz/runpod-worker-comfy:dev --platform linux/amd64 .
      ```
    - Optionally, skip downloading the default models to reduce the image size:
      ```bash
-     docker build --build-arg SKIP_DEFAULT_MODELS=1 -t <your_dockerhub_username>/runpod-worker-comfy:dev --platform linux/amd64 .
+     docker build --build-arg SKIP_DEFAULT_MODELS=1 -t frenchyyz/runpod-worker-comfy:dev --platform linux/amd64 .
      ```
    - Ensure to specify `--platform linux/amd64` to avoid errors on RunPod, see [issue #13](https://github.com/blib-la/runpod-worker-comfy/issues/13).
 
