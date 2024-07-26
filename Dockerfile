@@ -30,6 +30,15 @@ RUN if [ -z "$SKIP_DEFAULT_MODELS" ]; then wget -O models/checkpoints/sd_xl_base
 RUN if [ -z "$SKIP_DEFAULT_MODELS" ]; then wget -O models/vae/sdxl_vae.safetensors https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors; fi
 RUN if [ -z "$SKIP_DEFAULT_MODELS" ]; then wget -O models/vae/sdxl-vae-fp16-fix.safetensors https://huggingface.co/madebyollin/sdxl-vae-fp16-fix/resolve/main/sdxl_vae.safetensors; fi
 
+RUN wget -O models/checkpoints/RealVisXL_V4.0.safetensors https://huggingface.co/SG161222/RealVisXL_V4.0/resolve/main/RealVisXL_V4.0.safetensors
+RUN wget -O models/checkpoints/SUPIR-v0Q_fp16.safetensors https://huggingface.co/Kijai/SUPIR_pruned/resolve/main/SUPIR-v0Q_fp16.safetensors
+RUN wget -O models/checkpoints/SUPIR-v0F_fp16.safetensors https://huggingface.co/Kijai/SUPIR_pruned/resolve/main/SUPIR-v0F_fp16.safetensors
+
+RUN git clone https://github.com/kijai/ComfyUI-SUPIR.git custom_nodes/ComfyUI_SUPIR
+RUN git clone https://github.com/Gourieff/comfyui-reactor-node.git custom_nodes/ComfyUI_Reactor
+RUN git clone https://github.com/alt-key-project/comfyui-dream-project.git custom_nodes/ComfyUI_DreamProject
+RUN git clone https://github.com/kijai/ComfyUI-KJNodes.git custom_nodes/ComfyUI_KJNodes
+
 # Install ComfyUI dependencies
 RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 \
     && pip3 install --no-cache-dir xformers==0.0.21 \
